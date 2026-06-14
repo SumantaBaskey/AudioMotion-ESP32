@@ -20,9 +20,6 @@ public class AudioCaptureService extends Service {
     private volatile boolean running = false;
     private Thread captureThread;
 
-    private FFTAnalyzer analyzer;
-    private ESP32Client esp32;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -43,14 +40,12 @@ public class AudioCaptureService extends Service {
         return START_STICKY;
     }
 
-    public void setAnalyzer(FFTAnalyzer a) { this.analyzer = a; }
-    public void setESP32(ESP32Client c) { this.esp32 = c; }
-
     private void startCapture() {
         running = true;
         captureThread = new Thread(() -> {
             int sampleRate = 44100;
-            int bufSize = 1024; // default fft size
+            int realFftSize = MainActivity.analyzer != null ? MainActivity.analyzer.getFftSize() : 1024;
+            int bufSize = realFftSize;
             int minBuf = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_FLOAT);
             if (minBuf > bufSize) bufSize = minBuf;
 
@@ -74,9 +69,9 @@ public class AudioCaptureService extends Service {
 
             while (running) {
                 int read = recorder.read(buf, 0, buf.length, AudioRecord.READ_BLOCKING);
-                if (read > 0 && analyzer != null && esp32 != null) {
-                    float[] bars = analyzer.process(buf);
-                    esp32.send(bars);
+                if (read > 0 && MainActivity.analyzer != null && MainActivity.esp32 != null) {
+                    float[] bars = MainActivity.analyzer.process(buf);
+                    MainActivity.esp32.send(bars);
                 }
             }
 

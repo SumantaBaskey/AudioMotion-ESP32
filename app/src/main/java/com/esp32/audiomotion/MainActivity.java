@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCapture;
     private TextView tvStatus;
 
-    private FFTAnalyzer analyzer;
-    private ESP32Client esp32;
+    static FFTAnalyzer analyzer;
+    static ESP32Client esp32;
     private AudioCaptureService service;
     private boolean capturing = false;
 

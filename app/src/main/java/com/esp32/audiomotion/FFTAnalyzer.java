@@ -22,6 +22,7 @@ public class FFTAnalyzer {
     }
 
     // ── Settings ───────────────────────────────────────────────────────
+    public int getFftSize() { return fftSize; }
     public void setSmoothing(float v) { smoothing = v; }
     public void setMinFreq(float v) { minFreq = v; }
     public void setMaxFreq(float v) { maxFreq = v; }
