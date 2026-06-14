@@ -80,13 +80,11 @@ public class FFTAnalyzer {
                 return 20 * (float)Math.log10(rc) + 0.06f;
             }
             case 4: { // D-weighting
-                float f2 = f * f;
                 float hf = 2 * (float)Math.log10(f / 1000);
                 float rd = (f / (f + 0.346f)) * (float)Math.exp(-0.7 * hf * hf);
                 return 20 * (float)Math.log10(rd);
             }
             case 5: { // 468-weighting (ITU-R 468)
-                float f2 = f * f;
                 float ra = 1.2463328f * (float)Math.pow(10, 4);
                 float rb = (float)Math.pow(f2 + 28.056f * 28.056f, 2);
                 float rc = (f2 + 20.598997f * 20.598997f) * (float)Math.sqrt((f2 + 107.65265f * 107.65265f) * (f2 + 737.86223f * 737.86223f));
