@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#111"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ESP32 Connection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#1a1a1e"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/etIp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="ESP32 IP"
+                android:textColor="#fff"
+                android:textColorHint="#555"
+                android:background="#222"
+                android:padding="8dp"
+                android:inputType="numberDecimal|number"
+                android:text="192.168.4.1" />
+
+            <Button
+                android:id="@+id/btnCapture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start"
+                android:background="#00c853"
+                android:textColor="#fff"
+                android:padding="8dp 16dp"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Idle"
+            android:textColor="#888"
+            android:textSize="13sp"
+            android:padding="4dp 0"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvBars"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Bars: --"
+            android:textColor="#00e5ff"
+            android:textSize="11sp"
+            android:padding="4dp 0"
+            android:layout_marginBottom="8dp" />
+
+        <!-- FFT Settings -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FFT Settings"
+            android:textColor="#00e5ff"
+            android:textSize="14sp"
+            android:padding="4dp 0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#1a1a1e"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mode"
+                    android:textColor="#aaa"
+                    android:textSize="11sp" />
+                <Spinner
+                    android:id="@+id/spMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#222" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FFT Size"
+                    android:textColor="#aaa"
+                    android:textSize="11sp"
+                    android:layout_marginTop="8dp" />
+                <Spinner
+                    android:id="@+id/spFftSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#222" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smoothing"
+                    android:textColor="#aaa"
+                    android:textSize="11sp"
+                    android:layout_marginTop="8dp" />
+                <SeekBar
+                    android:id="@+id/sbSmoothing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100" />
+                <TextView
+                    android:id="@+id/tvSmoothing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.5"
+                    android:textColor="#fff"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Freq Scale"
+                    android:textColor="#aaa"
+                    android:textSize="11sp" />
+                <Spinner
+                    android:id="@+id/spScale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#222" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weighting"
+                    android:textColor="#aaa"
+                    android:textSize="11sp"
+                    android:layout_marginTop="8dp" />
+                <Spinner
+                    android:id="@+id/spWeighting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#222" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Frequency Range -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Frequency Range"
+            android:textColor="#00e5ff"
+            android:textSize="14sp"
+            android:padding="4dp 0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#1a1a1e"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min"
+                android:textColor="#aaa"
+                android:textSize="11sp" />
+            <EditText
+                android:id="@+id/etMinFreq"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textColor="#fff"
+                android:background="#222"
+                android:padding="4dp"
+                android:inputType="numberDecimal"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max"
+                android:textColor="#aaa"
+                android:textSize="11sp" />
+            <EditText
+                android:id="@+id/etMaxFreq"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="20000"
+                android:textColor="#fff"
+                android:background="#222"
+                android:padding="4dp"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <!-- Sensitivity -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sensitivity"
+            android:textColor="#00e5ff"
+            android:textSize="14sp"
+            android:padding="4dp 0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#1a1a1e"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Min dB"
+                    android:textColor="#aaa"
+                    android:textSize="11sp" />
+                <SeekBar
+                    android:id="@+id/sbMinDb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="60" />
+                <TextView
+                    android:id="@+id/tvMinDb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-85"
+                    android:textColor="#fff"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max dB"
+                    android:textColor="#aaa"
+                    android:textSize="11sp" />
+                <SeekBar
+                    android:id="@+id/sbMaxDb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="40" />
+                <TextView
+                    android:id="@+id/tvMaxDb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-25"
+                    android:textColor="#fff"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Linear Amplitude -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Linear Amplitude"
+            android:textColor="#00e5ff"
+            android:textSize="14sp"
+            android:padding="4dp 0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#1a1a1e"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btnLinearAmp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Linear Amplitude"
+                android:background="#333"
+                android:textColor="#ccc"
+                android:padding="8dp 12dp"
+                android:stateListAnimator="@null" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Boost"
+                    android:textColor="#aaa"
+                    android:textSize="11sp" />
+                <SeekBar
+                    android:id="@+id/sbBoost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="30" />
+                <TextView
+                    android:id="@+id/tvBoost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.0"
+                    android:textColor="#fff"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Send Settings -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send to ESP32"
+            android:textColor="#00e5ff"
+            android:textSize="14sp"
+            android:padding="4dp 0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#1a1a1e"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FPS"
+                android:textColor="#aaa"
+                android:textSize="11sp" />
+            <SeekBar
+                android:id="@+id/sbFps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:max="60" />
+            <TextView
+                android:id="@+id/tvFps"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textColor="#fff"
+                android:textSize="11sp"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="audioMotion-analyzer"
+            android:textColor="#555"
+            android:textSize="11sp"
+            android:gravity="center"
+            android:padding="16dp" />
+
+    </LinearLayout>
+</ScrollView>
