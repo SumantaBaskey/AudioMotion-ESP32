@@ -41,6 +41,7 @@ public class AudioCaptureService extends Service {
     }
 
     private void startCapture() {
+        if (running) return;
         running = true;
         captureThread = new Thread(() -> {
             int sampleRate = 44100;
