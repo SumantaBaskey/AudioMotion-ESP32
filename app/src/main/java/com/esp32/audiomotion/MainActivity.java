@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         applySettings();
         esp32.setEnabled(true);
         Intent intent = new Intent(this, AudioCaptureService.class);
-        startForegroundService(intent);
+        startService(intent);
         capturing = true;
         btnCapture.setText("Stop");
         tvStatus.setText("Capturing...");
